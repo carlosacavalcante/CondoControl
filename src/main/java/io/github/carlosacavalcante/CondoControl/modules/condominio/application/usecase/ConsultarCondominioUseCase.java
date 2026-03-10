@@ -1,27 +1,26 @@
 package io.github.carlosacavalcante.CondoControl.modules.condominio.application.usecase;
 
-import io.github.carlosacavalcante.CondoControl.modules.condominio.application.dto.CondominioRequestDTO;
 import io.github.carlosacavalcante.CondoControl.modules.condominio.domain.model.Condominio;
 import io.github.carlosacavalcante.CondoControl.modules.condominio.infrastructure.mapper.CondominioMapper;
 import io.github.carlosacavalcante.CondoControl.modules.condominio.infrastructure.repository.JpaCondominioRepository;
+import io.github.carlosacavalcante.CondoControl.shared.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CriarCondominioUseCase {
+public class ConsultarCondominioUseCase {
 
     private final JpaCondominioRepository repository;
 
     private final CondominioMapper mapper;
 
-    public CriarCondominioUseCase(JpaCondominioRepository repository, CondominioMapper mapper) {
+    public ConsultarCondominioUseCase(JpaCondominioRepository repository, CondominioMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
 
-    public Condominio excute(CondominioRequestDTO requestDTO) {
-        if(repository.existsByCnpj(requestDTO.cnpj())){
-            throw new RuntimeException("Já existe um condominio com o cnpj informado!");
-        }
-        return mapper.toCondominio(repository.save(mapper.toSave(requestDTO)));
+    public Condominio excute(Long id) {
+        return mapper.toCondominio(repository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("Condominio informado não encontrado!")));
     }
+
 }

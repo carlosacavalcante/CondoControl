@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface JpaCondominioRepository
         extends JpaRepository<CondominioEntity, Long> {
+
+    boolean existsByCnpj(String cnpj);
 }
