@@ -1,5 +1,6 @@
 package io.github.carlosacavalcante.CondoControl.modules.condominio.application.usecase;
 
+import io.github.carlosacavalcante.CondoControl.modules.condominio.application.dto.CondominioDto;
 import io.github.carlosacavalcante.CondoControl.modules.condominio.domain.model.Condominio;
 import io.github.carlosacavalcante.CondoControl.modules.condominio.infrastructure.mapper.CondominioMapper;
 import io.github.carlosacavalcante.CondoControl.modules.condominio.infrastructure.repository.JpaCondominioRepository;
@@ -18,7 +19,7 @@ public class ConsultarCondominioUseCase {
         this.mapper = mapper;
     }
 
-    public Condominio excute(Long id) {
+    public CondominioDto execute(Long id) {
         return mapper.toCondominio(repository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Condominio informado não encontrado!")));
     }

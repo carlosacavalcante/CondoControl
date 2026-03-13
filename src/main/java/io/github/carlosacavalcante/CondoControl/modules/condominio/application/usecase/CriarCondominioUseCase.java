@@ -1,5 +1,6 @@
 package io.github.carlosacavalcante.CondoControl.modules.condominio.application.usecase;
 
+import io.github.carlosacavalcante.CondoControl.modules.condominio.application.dto.CondominioDto;
 import io.github.carlosacavalcante.CondoControl.modules.condominio.application.dto.CondominioRequestDTO;
 import io.github.carlosacavalcante.CondoControl.modules.condominio.domain.model.Condominio;
 import io.github.carlosacavalcante.CondoControl.modules.condominio.infrastructure.mapper.CondominioMapper;
@@ -18,7 +19,7 @@ public class CriarCondominioUseCase {
         this.mapper = mapper;
     }
 
-    public Condominio excute(CondominioRequestDTO requestDTO) {
+    public CondominioDto execute(CondominioRequestDTO requestDTO) {
         if(repository.existsByCnpj(requestDTO.cnpj())){
             throw new RuntimeException("Já existe um condominio com o cnpj informado!");
         }

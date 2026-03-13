@@ -1,10 +1,10 @@
 package io.github.carlosacavalcante.CondoControl.modules.condominio.infrastructure.mapper;
 
 
+import io.github.carlosacavalcante.CondoControl.modules.condominio.application.dto.CondominioDto;
 import io.github.carlosacavalcante.CondoControl.modules.condominio.application.dto.CondominioRequestDTO;
 import io.github.carlosacavalcante.CondoControl.modules.condominio.domain.model.Condominio;
 import io.github.carlosacavalcante.CondoControl.modules.condominio.infrastructure.entity.CondominioEntity;
-import jakarta.persistence.Column;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -24,8 +24,8 @@ public class CondominioMapper {
         return entity;
     }
 
-    public Condominio toCondominio(CondominioEntity entity){
-        return new Condominio(
+    public CondominioDto toCondominio(CondominioEntity entity){
+        return new CondominioDto(
                 entity.getId(),
                 entity.getNome(),
                 entity.getCnpj(),
@@ -53,5 +53,16 @@ public class CondominioMapper {
 
         return entity;
 
+    }
+
+    public CondominioEntity toEditar(CondominioRequestDTO requestDTO, CondominioEntity entity) {
+        entity.setNome(requestDTO.nome());
+        entity.setCnpj(requestDTO.cnpj());
+        entity.setEndereco(requestDTO.endereco());
+        entity.setNumero(requestDTO.numero());
+        entity.setCidade(requestDTO.cidade());
+        entity.setEstado(requestDTO.estado());
+        entity.setCep(requestDTO.cep());
+        return entity;
     }
 }

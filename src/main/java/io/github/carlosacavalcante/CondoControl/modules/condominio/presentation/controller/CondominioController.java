@@ -1,10 +1,9 @@
 package io.github.carlosacavalcante.CondoControl.modules.condominio.presentation.controller;
 
+import io.github.carlosacavalcante.CondoControl.modules.condominio.application.dto.CondominioDto;
 import io.github.carlosacavalcante.CondoControl.modules.condominio.application.dto.CondominioRequestDTO;
-import io.github.carlosacavalcante.CondoControl.modules.condominio.application.usecase.ConsultarCondominioUseCase;
-import io.github.carlosacavalcante.CondoControl.modules.condominio.application.usecase.CriarCondominioUseCase;
 import io.github.carlosacavalcante.CondoControl.modules.condominio.domain.model.Condominio;
-import jakarta.validation.Valid;
+import io.github.carlosacavalcante.CondoControl.modules.condominio.presentation.factory.UseCaseFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,20 +13,22 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class CondominioController {
 
-    private final CriarCondominioUseCase criarUseCase;
-
-    private final ConsultarCondominioUseCase consultarCondominio;
+    private final UseCaseFactory factory;
 
     @PostMapping
-    public ResponseEntity<Condominio> criarCondominio (@RequestBody CondominioRequestDTO requestDTO){
-        Condominio condominio = criarUseCase.excute(requestDTO);
-        return ResponseEntity.ok(condominio);
+    public ResponseEntity<CondominioDto> criarCondominio (@RequestBody CondominioRequestDTO requestDTO){
+        return ResponseEntity.ok(factory.criarCondominio(requestDTO));
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Condominio> consultarCondominioPorId(@PathVariable Long id){
-        Condominio condominio = consultarCondominio.excute(id);
-        return ResponseEntity.ok(condominio);
+    public ResponseEntity<CondominioDto> consultarCondominioPorId(@PathVariable Long id){
+        return ResponseEntity.ok(factory.consultarCondominio(id));
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<CondominioDto> editarCondominio(@PathVariable Long id,
+                                                       @RequestBody CondominioRequestDTO requestDTO){
+        return ResponseEntity.ok(factory.editarCondominio(id,requestDTO));
     }
 
 }
