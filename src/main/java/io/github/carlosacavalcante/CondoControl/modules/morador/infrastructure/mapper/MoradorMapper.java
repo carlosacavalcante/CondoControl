@@ -12,6 +12,8 @@ import jakarta.persistence.Enumerated;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 @Component
 public class MoradorMapper {
@@ -48,5 +50,11 @@ public class MoradorMapper {
                 entity.getAtivo(),
                 entity.getDataCriacao()
         );
+    }
+
+    public List<MoradorDto> toMoradorList(List<MoradorEntity> moradores) {
+        return moradores.stream()
+                .map(this::toMorador)
+                .toList();
     }
 }
