@@ -5,13 +5,12 @@ import io.github.carlosacavalcante.CondoControl.modules.condominio.application.d
 import io.github.carlosacavalcante.CondoControl.modules.condominio.application.usecase.ConsultarCondominioUseCase;
 import io.github.carlosacavalcante.CondoControl.modules.condominio.application.usecase.CriarCondominioUseCase;
 import io.github.carlosacavalcante.CondoControl.modules.condominio.application.usecase.EditarCondominioUseCase;
-import io.github.carlosacavalcante.CondoControl.modules.condominio.domain.model.Condominio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class UseCaseFactory {
+public class UseCaseCondominio {
 
     private final CriarCondominioUseCase criarUseCase;
 

@@ -2,8 +2,7 @@ package io.github.carlosacavalcante.CondoControl.modules.condominio.presentation
 
 import io.github.carlosacavalcante.CondoControl.modules.condominio.application.dto.CondominioDto;
 import io.github.carlosacavalcante.CondoControl.modules.condominio.application.dto.CondominioRequestDTO;
-import io.github.carlosacavalcante.CondoControl.modules.condominio.domain.model.Condominio;
-import io.github.carlosacavalcante.CondoControl.modules.condominio.presentation.factory.UseCaseFactory;
+import io.github.carlosacavalcante.CondoControl.modules.condominio.presentation.factory.UseCaseCondominio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class CondominioController {
 
-    private final UseCaseFactory factory;
+    private final UseCaseCondominio factory;
 
     @PostMapping
     public ResponseEntity<CondominioDto> criarCondominio (@RequestBody CondominioRequestDTO requestDTO){
